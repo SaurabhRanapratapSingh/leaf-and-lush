@@ -13,7 +13,6 @@ import ContactPage from './pages/ContactPage';
 import CartDrawer from './components/Cart/CartDrawer';
 import FloatingCart from './components/FloatingCart';
 import FloatingCoffeeMascot from './components/FloatingCoffeeMascot';
-import AdminModal from './components/Admin/AdminModal';
 import Footer from './components/Footer';
 import PageTransition from './components/PageTransition';
 
@@ -73,7 +72,6 @@ export default function App() {
               <CartDrawer />
               <FloatingCart />
               <FloatingCoffeeMascot />
-              <AdminModal />
               <Footer />
             </div>
           </CartProvider>
