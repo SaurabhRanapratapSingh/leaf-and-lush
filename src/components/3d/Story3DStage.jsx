@@ -10,20 +10,20 @@ export default function Story3DStage() {
     <div className="relative w-full max-w-4xl mx-auto my-6 sm:my-10 p-4 sm:p-8 rounded-3xl bg-gradient-to-b from-coffee-900/60 to-coffee-950/80 border border-leaf-500/25 shadow-2xl overflow-hidden">
       
       {/* Dynamic Ambient Radiant Lighting */}
-      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-64 sm:w-96 h-64 sm:h-96 bg-leaf-500/15 rounded-full blur-[90px] pointer-events-none" />
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-64 sm:w-96 h-64 sm:h-96 bg-caramel-500/15 rounded-full blur-[90px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-64 sm:w-96 h-64 sm:h-96 bg-leaf-500/15 rounded-full blur-xl sm:blur-[90px] pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-64 sm:w-96 h-64 sm:h-96 bg-caramel-500/15 rounded-full blur-xl sm:blur-[90px] pointer-events-none" />
 
-      {/* Floating Animated 3D Botanical & Fruit Elements */}
-      <div className="absolute top-6 left-6 pointer-events-none z-10">
+      {/* Floating Animated 3D Botanical & Fruit Elements (Desktop / Tablet) */}
+      <div className="hidden sm:block absolute top-6 left-6 pointer-events-none z-10">
         <Floating3DLeaf size="md" />
       </div>
-      <div className="absolute bottom-8 left-10 pointer-events-none z-10">
+      <div className="hidden sm:block absolute bottom-8 left-10 pointer-events-none z-10">
         <Floating3DOrangeSlice />
       </div>
-      <div className="absolute top-8 right-8 pointer-events-none z-10">
+      <div className="hidden sm:block absolute top-8 right-8 pointer-events-none z-10">
         <Floating3DStrawberry />
       </div>
-      <div className="absolute bottom-6 right-12 pointer-events-none z-10">
+      <div className="hidden sm:block absolute bottom-6 right-12 pointer-events-none z-10">
         <Floating3DWatermelon />
       </div>
 
@@ -35,7 +35,7 @@ export default function Story3DStage() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-leaf-500/15 border border-leaf-500/30 text-leaf-300 text-xs font-bold uppercase tracking-wider mb-3 backdrop-blur-md"
+          className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-leaf-500/15 border border-leaf-500/30 text-leaf-300 text-xs font-bold uppercase tracking-wider mb-3 md:backdrop-blur-md"
         >
           <Sprout className="w-3.5 h-3.5 text-leaf-400" />
           <span>The Botanical Harmony</span>

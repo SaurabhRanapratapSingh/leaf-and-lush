@@ -58,6 +58,14 @@ export default function FloatingCoffeeMascot() {
     }, 4500);
   };
 
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 768);
+    check();
+    window.addEventListener('resize', check, { passive: true });
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   if (isCartOpen) {
     return null;
   }
@@ -79,7 +87,7 @@ export default function FloatingCoffeeMascot() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 8, scale: 0.88 }}
               transition={{ duration: 0.22, ease: "easeOut" }}
-              className="mb-2 max-w-[210px] sm:max-w-[240px] px-3.5 py-2 rounded-2xl bg-coffee-950/95 border border-leaf-500/40 shadow-xl backdrop-blur-md text-cream-50 text-[11px] sm:text-xs leading-snug font-medium text-left relative"
+              className="mb-2 max-w-[210px] sm:max-w-[240px] px-3.5 py-2 rounded-2xl bg-coffee-950/95 border border-leaf-500/40 shadow-xl md:backdrop-blur-md text-cream-50 text-[11px] sm:text-xs leading-snug font-medium text-left relative"
             >
               <span>{MASCOT_QUOTES[currentQuoteIndex]}</span>
               {/* Bubble Arrow */}
@@ -94,12 +102,16 @@ export default function FloatingCoffeeMascot() {
           animate={
             isWiggling
               ? { rotateZ: [0, -12, 12, -8, 8, 0], scale: [1, 1.1, 1] }
-              : { y: [0, -5, 0] }
+              : isDesktop
+              ? { y: [0, -5, 0] }
+              : undefined
           }
           transition={
             isWiggling
               ? { duration: 0.5 }
-              : { duration: 4, repeat: Infinity, ease: "easeInOut" }
+              : isDesktop
+              ? { duration: 4, repeat: Infinity, ease: "easeInOut" }
+              : undefined
           }
           className="relative group cursor-pointer focus:outline-none rounded-2xl p-1 select-none"
           aria-label="Tap Leaf & Lush fresh bowl mascot"

@@ -5,38 +5,46 @@ import Floating3DLeaf from './Floating3DLeaf';
 import { Floating3DStrawberry } from './Floating3DFruits';
 
 export default function FreshSaladBowlCanvas({ mousePosition = { x: 0, y: 0 } }) {
+  const [isMobile, setIsMobile] = React.useState(false);
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile, { passive: true });
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Smooth spring physics for mouse parallax tilt (desktop)
   const springConfig = { damping: 30, stiffness: 100 };
   const rotateX = useSpring(mousePosition.y * -8, springConfig);
   const rotateY = useSpring(mousePosition.x * 10, springConfig);
   const translateY = useSpring(mousePosition.y * -4, springConfig);
 
-  // Scroll scaling
+  // Scroll scaling (active on desktop, decoupled on mobile for 60fps native scroll)
   const { scrollY } = useScroll();
-  const scrollScale = useTransform(scrollY, [0, 350], [1, 0.92]);
-  const scrollOpacity = useTransform(scrollY, [0, 450], [1, 0.5]);
+  const desktopScale = useTransform(scrollY, [0, 350], [1, 0.92]);
+  const desktopOpacity = useTransform(scrollY, [0, 450], [1, 0.5]);
 
   return (
     <div className="relative w-full max-w-[260px] sm:max-w-[440px] lg:max-w-[520px] aspect-square flex items-center justify-center select-none perspective-[1000px] transform-gpu">
       
       {/* Radiant Emerald Glow - Optimized static backdrop */}
-      <div className="absolute w-48 h-48 sm:w-80 sm:h-80 lg:w-[420px] lg:h-[420px] rounded-full bg-gradient-to-tr from-leaf-500/20 via-emerald-600/25 to-citrus-500/15 blur-2xl pointer-events-none" />
+      <div className="absolute w-40 h-40 sm:w-80 sm:h-80 lg:w-[420px] lg:h-[420px] rounded-full bg-gradient-to-tr from-leaf-500/20 via-emerald-600/25 to-citrus-500/15 blur-xl sm:blur-2xl pointer-events-none" />
 
       {/* Floating 3D Interactive Container */}
       <motion.div
-        className="relative w-full h-full flex items-center justify-center transform-gpu will-change-transform"
+        className="relative w-full h-full flex items-center justify-center transform-gpu"
         style={{
-          rotateX,
-          rotateY,
-          y: translateY,
-          scale: scrollScale,
-          opacity: scrollOpacity,
+          rotateX: isMobile ? 0 : rotateX,
+          rotateY: isMobile ? 0 : rotateY,
+          y: isMobile ? 0 : translateY,
+          scale: isMobile ? 1 : desktopScale,
+          opacity: isMobile ? 1 : desktopOpacity,
           transformStyle: "preserve-3d",
         }}
-        animate={{
+        animate={isMobile ? undefined : {
           y: [0, -6, 0],
         }}
-        transition={{
+        transition={isMobile ? undefined : {
           duration: 4.5,
           repeat: Infinity,
           ease: "easeInOut"

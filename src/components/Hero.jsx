@@ -32,8 +32,8 @@ export default function Hero() {
       </div>
 
       {/* Ambient Glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[240px] sm:w-[650px] h-[240px] sm:h-[650px] bg-leaf-500/15 rounded-full blur-[90px] sm:blur-[160px] pointer-events-none" />
-      <div className="absolute top-1/3 right-1/4 w-32 sm:w-80 h-32 sm:h-80 bg-caramel-500/12 rounded-full blur-[80px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] sm:w-[650px] h-[200px] sm:h-[650px] bg-leaf-500/15 rounded-full blur-2xl sm:blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-28 sm:w-80 h-28 sm:h-80 bg-caramel-500/12 rounded-full blur-xl sm:blur-[80px] pointer-events-none" />
 
       <div className="relative z-20 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-8 items-center">
@@ -46,7 +46,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="inline-flex items-center gap-1.5 px-3 py-0.5 sm:px-3.5 sm:py-1 rounded-full bg-coffee-900/90 border border-leaf-500/35 text-leaf-300 text-[10px] sm:text-xs font-semibold tracking-wide shadow-md mb-1.5 sm:mb-4 backdrop-blur-md"
+              className="inline-flex items-center gap-1.5 px-3 py-0.5 sm:px-3.5 sm:py-1 rounded-full bg-coffee-900/90 border border-leaf-500/35 text-leaf-300 text-[10px] sm:text-xs font-semibold tracking-wide shadow-md mb-1.5 sm:mb-4 md:backdrop-blur-md"
             >
               <Sprout className="w-3.5 h-3.5 text-leaf-400 shrink-0" />
               <span className="text-cream-50 font-bold uppercase tracking-wider">Leaf'nLush</span>
@@ -96,7 +96,7 @@ export default function Hero() {
               {/* Secondary CTA: Subscriptions */}
               <a
                 href="#subscriptions"
-                className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3.5 sm:px-6 py-2.5 sm:py-3.5 rounded-xl sm:rounded-full bg-coffee-900/80 hover:bg-coffee-800 border border-leaf-500/30 text-cream-100 font-semibold text-xs sm:text-base backdrop-blur-sm transition-all duration-200 hover:border-leaf-400 active:scale-[0.97] min-h-[38px] sm:min-h-[44px]"
+                className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3.5 sm:px-6 py-2.5 sm:py-3.5 rounded-xl sm:rounded-full bg-coffee-900/80 hover:bg-coffee-800 border border-leaf-500/30 text-cream-100 font-semibold text-xs sm:text-base md:backdrop-blur-sm transition-all duration-200 hover:border-leaf-400 active:scale-[0.97] min-h-[38px] sm:min-h-[44px]"
               >
                 <Calendar className="w-3.5 h-3.5 text-leaf-400" />
                 <span>Monthly Plans</span>

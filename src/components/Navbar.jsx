@@ -12,11 +12,15 @@ export default function Navbar() {
   const location = useLocation();
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      if (window.scrollY > 15) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(() => {
+          const scrolled = window.scrollY > 15;
+          setIsScrolled(prev => (prev !== scrolled ? scrolled : prev));
+          ticking = false;
+        });
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });

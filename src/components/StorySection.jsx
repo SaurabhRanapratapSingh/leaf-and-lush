@@ -34,6 +34,7 @@ export default function StorySection() {
               alt="Fresh fruits and artisanal coffee"
               className="w-full h-full object-cover"
               loading="lazy"
+              decoding="async"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-coffee-950/80 via-transparent to-transparent" />
             <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-[11px] text-cream-100 font-medium">
@@ -72,6 +73,7 @@ export default function StorySection() {
                     alt="Barista brewing coffee"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     loading="lazy"
+              decoding="async"
                   />
                 </div>
                 <div className="glass-card p-4 rounded-2xl border border-leaf-500/25">
@@ -97,6 +99,7 @@ export default function StorySection() {
                     alt="Fresh fruit bowl arrangement"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     loading="lazy"
+              decoding="async"
                   />
                 </div>
               </div>

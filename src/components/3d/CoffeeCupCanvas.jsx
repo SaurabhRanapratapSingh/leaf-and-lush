@@ -4,16 +4,24 @@ import CoffeeSteam from './CoffeeSteam';
 import { Sparkles, Sprout } from 'lucide-react';
 
 export default function CoffeeCupCanvas({ mousePosition = { x: 0, y: 0 } }) {
+  const [isMobile, setIsMobile] = React.useState(false);
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile, { passive: true });
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Smooth spring physics for mouse parallax tilt
   const springConfig = { damping: 28, stiffness: 120 };
   const rotateX = useSpring(mousePosition.y * -10, springConfig);
   const rotateY = useSpring(mousePosition.x * 14, springConfig);
   const translateY = useSpring(mousePosition.y * -5, springConfig);
 
-  // Scroll scaling
+  // Scroll scaling (active on desktop, decoupled on mobile for 60fps native scroll)
   const { scrollY } = useScroll();
-  const scrollScale = useTransform(scrollY, [0, 380], [1, 0.9]);
-  const scrollOpacity = useTransform(scrollY, [0, 480], [1, 0.4]);
+  const desktopScale = useTransform(scrollY, [0, 380], [1, 0.9]);
+  const desktopOpacity = useTransform(scrollY, [0, 480], [1, 0.4]);
 
   return (
     <div className="relative w-full max-w-[280px] sm:max-w-[460px] lg:max-w-[560px] aspect-square flex items-center justify-center select-none perspective-[1000px]">
@@ -21,11 +29,11 @@ export default function CoffeeCupCanvas({ mousePosition = { x: 0, y: 0 } }) {
       {/* Cinematic Radial Backlight */}
       <motion.div
         className="absolute w-56 h-56 sm:w-88 sm:h-88 lg:w-[460px] lg:h-[460px] rounded-full bg-gradient-to-tr from-caramel-500/22 via-coffee-600/28 to-leaf-500/22 blur-2xl sm:blur-3xl pointer-events-none"
-        animate={{
+        animate={isMobile ? undefined : {
           scale: [1, 1.08, 0.96, 1],
           opacity: [0.65, 0.85, 0.7, 0.65]
         }}
-        transition={{
+        transition={isMobile ? undefined : {
           duration: 6,
           repeat: Infinity,
           ease: "easeInOut"
@@ -36,18 +44,18 @@ export default function CoffeeCupCanvas({ mousePosition = { x: 0, y: 0 } }) {
       <motion.div
         className="relative w-full h-full flex items-center justify-center transform-gpu"
         style={{
-          rotateX,
-          rotateY,
-          y: translateY,
-          scale: scrollScale,
-          opacity: scrollOpacity,
+          rotateX: isMobile ? 0 : rotateX,
+          rotateY: isMobile ? 0 : rotateY,
+          y: isMobile ? 0 : translateY,
+          scale: isMobile ? 1 : desktopScale,
+          opacity: isMobile ? 1 : desktopOpacity,
           transformStyle: "preserve-3d",
         }}
-        animate={{
+        animate={isMobile ? undefined : {
           y: [0, -8, 0],
           rotateZ: [0, 1.2, -1.2, 0]
         }}
-        transition={{
+        transition={isMobile ? undefined : {
           duration: 5,
           repeat: Infinity,
           ease: "easeInOut"

@@ -140,7 +140,7 @@ export default function Menu() {
         </div>
 
         {/* Compact Horizontally Scrollable Category Bar */}
-        <div className="sticky top-14 sm:top-20 z-30 py-1.5 -mx-3 px-3 sm:mx-0 sm:px-0 mb-3 sm:mb-6 backdrop-blur-md bg-coffee-950/90 rounded-2xl border border-leaf-500/15 shadow-xl">
+        <div className="sticky top-14 sm:top-20 z-30 py-1.5 -mx-3 px-3 sm:mx-0 sm:px-0 mb-3 sm:mb-6 bg-coffee-950/95 md:bg-coffee-950/90 md:backdrop-blur-md rounded-2xl border border-leaf-500/15 shadow-xl">
           <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-0.5 scrollbar-none">
             {categories.map((cat) => {
               const IconComponent = iconMap[cat.icon] || Coffee;

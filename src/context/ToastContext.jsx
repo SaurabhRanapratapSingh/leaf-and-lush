@@ -35,7 +35,7 @@ export const ToastProvider = ({ children }) => {
               initial={{ opacity: 0, y: 20, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, scale: 0.85, transition: { duration: 0.2 } }}
-              className="pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-2xl bg-coffee-900/95 border border-caramel-500/30 text-cream-100 shadow-2xl backdrop-blur-md"
+              className="pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-2xl bg-coffee-900/95 border border-caramel-500/30 text-cream-100 shadow-2xl md:backdrop-blur-md"
             >
               {toast.type === 'success' && (
                 <CheckCircle2 className="w-5 h-5 text-caramel-400 shrink-0" />

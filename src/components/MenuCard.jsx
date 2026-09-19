@@ -23,12 +23,11 @@ export default function MenuCard({ item, index = 0 }) {
 
   return (
     <motion.div
-      layout
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.25, delay: (index % 6) * 0.03 }}
-      className="group relative glass-card rounded-2xl overflow-hidden border border-leaf-500/20 hover:border-leaf-400/50 transition-all duration-200 hover:-translate-y-1 hover:shadow-glow-leaf flex flex-col justify-between select-none bg-coffee-900/80 backdrop-blur-md"
+      className="group relative glass-card rounded-2xl overflow-hidden border border-leaf-500/20 hover:border-leaf-400/50 transition-all duration-200 hover:-translate-y-1 hover:shadow-glow-leaf flex flex-col justify-between select-none bg-coffee-900/95 md:bg-coffee-900/80 md:backdrop-blur-md"
     >
       {/* Product Image Area */}
       <div className="relative h-32 sm:h-40 md:h-44 w-full overflow-hidden bg-coffee-950 shrink-0">
@@ -37,13 +36,14 @@ export default function MenuCard({ item, index = 0 }) {
           alt={item.name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-coffee-950/80 via-transparent to-transparent pointer-events-none" />
 
         {/* Top Badges: Weight & Dietary */}
         <div className="absolute top-2 left-2 flex items-center gap-1.5 flex-wrap">
           {item.weight && (
-            <div className="px-2 py-0.5 rounded-full bg-coffee-950/90 backdrop-blur-md border border-leaf-500/40 text-[9px] sm:text-[10px] font-bold text-leaf-300 shadow-md">
+            <div className="px-2 py-0.5 rounded-full bg-coffee-950/95 md:backdrop-blur-md border border-leaf-500/40 text-[9px] sm:text-[10px] font-bold text-leaf-300 shadow-md">
               {item.weight}
             </div>
           )}
@@ -58,14 +58,14 @@ export default function MenuCard({ item, index = 0 }) {
         </div>
 
         {/* Rating Pill */}
-        <div className="absolute top-2 right-2 px-1.5 py-0.5 rounded-full bg-coffee-950/85 backdrop-blur-sm border border-coffee-800 flex items-center gap-0.5 text-[9px] sm:text-[10px] font-bold text-cream-100 shadow-sm">
+        <div className="absolute top-2 right-2 px-1.5 py-0.5 rounded-full bg-coffee-950/95 md:backdrop-blur-sm border border-coffee-800 flex items-center gap-0.5 text-[9px] sm:text-[10px] font-bold text-cream-100 shadow-sm">
           <Star className="w-2.5 h-2.5 text-gold-400 fill-gold-400" />
           <span>{item.rating || '4.9'}</span>
         </div>
 
         {/* Subtitle tag overlay on bottom of image */}
         {item.subtitle && (
-          <div className="absolute bottom-1.5 left-2 px-2 py-0.5 rounded-md bg-coffee-950/90 text-[10px] sm:text-xs font-semibold text-cream-200 backdrop-blur-sm border border-leaf-500/30">
+          <div className="absolute bottom-1.5 left-2 px-2 py-0.5 rounded-md bg-coffee-950/95 text-[10px] sm:text-xs font-semibold text-cream-200 md:backdrop-blur-sm border border-leaf-500/30">
             {item.subtitle}
           </div>
         )}

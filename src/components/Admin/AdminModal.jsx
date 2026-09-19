@@ -224,7 +224,7 @@ export default function AdminModal() {
       {/* Unobtrusive Floating Admin Button on Bottom-Left */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 left-3 sm:bottom-5 sm:left-5 z-30 p-2 sm:px-3 sm:py-2 rounded-full bg-coffee-950/90 hover:bg-coffee-900 border border-leaf-500/30 text-cream-300 hover:text-leaf-300 shadow-lg backdrop-blur-md transition-all duration-200 active:scale-95 group flex items-center gap-1.5 text-[11px]"
+        className="fixed bottom-4 left-3 sm:bottom-5 sm:left-5 z-30 p-2 sm:px-3 sm:py-2 rounded-full bg-coffee-950/90 hover:bg-coffee-900 border border-leaf-500/30 text-cream-300 hover:text-leaf-300 shadow-lg md:backdrop-blur-md transition-all duration-200 active:scale-95 group flex items-center gap-1.5 text-[11px]"
         title="Admin Portal"
         aria-label="Admin Portal"
       >

@@ -47,6 +47,7 @@ export default function Testimonials() {
                   alt={test.name}
                   className="w-8 h-8 rounded-full object-cover border border-caramel-400/40"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div>
                   <h4 className="font-serif font-bold text-cream-50 text-xs">{test.name}</h4>

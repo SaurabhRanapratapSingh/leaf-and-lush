@@ -8,27 +8,42 @@ export default function QuickOrderButton() {
   const { totalItems, isCartOpen } = useCart();
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Show when scrolled down past 450px and before reaching the menu or footer
+    let ticking = false;
+    let menuInView = false;
+
+    // Use IntersectionObserver to track menu section presence without querying layout on scroll
+    const menuSection = document.getElementById('menu');
+    let observer;
+    if (menuSection && 'IntersectionObserver' in window) {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          menuInView = entry.isIntersecting;
+          updateVisibility();
+        },
+        { rootMargin: '150px 0px 100px 0px' }
+      );
+      observer.observe(menuSection);
+    }
+
+    const updateVisibility = () => {
       const scrollY = window.scrollY;
-      const menuSection = document.getElementById('menu');
-      if (!menuSection) return;
+      const shouldShow = scrollY > 500 && !menuInView;
+      setShowButton(prev => (prev !== shouldShow ? shouldShow : prev));
+      ticking = false;
+    };
 
-      const menuTop = menuSection.offsetTop;
-      const menuHeight = menuSection.offsetHeight;
-
-      // Check if user is currently inside the menu section
-      const isInMenu = scrollY >= (menuTop - 200) && scrollY <= (menuTop + menuHeight - 100);
-
-      if (scrollY > 500 && !isInMenu) {
-        setShowButton(true);
-      } else {
-        setShowButton(false);
+    const handleScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(updateVisibility);
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (observer) observer.disconnect();
+    };
   }, []);
 
   // If cart has items or cart is open, let FloatingCart have priority

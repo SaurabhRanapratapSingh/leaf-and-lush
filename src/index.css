@@ -10,12 +10,23 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Mobile scroll performance & responsive touch */
+  /* Smooth scroll exclusively for desktop pointer devices with fine control; mobile retains 100% native momentum scrolling */
+  @media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* Mobile scroll performance & responsive touch - avoid overflow-x:hidden on body which kills momentum scroll */
   body {
-    overflow-x: hidden;
     touch-action: manipulation;
     background-color: #0C0704;
     -webkit-overflow-scrolling: touch;
+  }
+
+  #root {
+    overflow-x: clip;
+    min-height: 100vh;
   }
 
   /* Custom luxury scrollbar */
@@ -89,7 +100,9 @@
 
 /* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
